@@ -18,13 +18,14 @@ A Django REST Framework project for managing movies, running in Docker.
    cd Movie-DRF
 
 2. Create a `.env` file based on `.env.example`:
+```
    SECRET_KEY=your-secret-key
    DB_NAME=postgres
    DB_USER=postgres
    DB_PASSWORD=postgres
    DB_HOST=db
    DB_PORT=5432
-
+```
 ---
 
 ## ▶️ Running the Project

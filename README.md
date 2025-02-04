@@ -1,6 +1,6 @@
-# Movie-DRF
+# Full Stack Docker Template
 
-A Django REST Framework project for managing movies, running in Docker.
+A Dockerized Full Stack setup with Django REST Framework (DRF) for the backend and a Vite-based frontend.
 
 ---
 
@@ -14,18 +14,17 @@ A Django REST Framework project for managing movies, running in Docker.
 ## 🔧 Setup
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/Movie-DRF.git
-   cd Movie-DRF
+   git clone https://github.com/yourusername/fullstack-docker-template.git
+   cd fullstack-docker-template
 
 2. Create a `.env` file based on `.env.example`:
-```
    SECRET_KEY=your-secret-key
    DB_NAME=postgres
    DB_USER=postgres
    DB_PASSWORD=postgres
    DB_HOST=db
    DB_PORT=5432
-```
+
 ---
 
 ## ▶️ Running the Project
@@ -36,7 +35,8 @@ A Django REST Framework project for managing movies, running in Docker.
    docker-compose up -d
 
 3. Access the app:
-   - **Homepage**: http://localhost:8000/
+   - **Frontend**: http://localhost:3000/
+   - **Backend API**: http://localhost:8000/
    - **Admin Panel**: http://localhost:8000/admin/
 
 ---
@@ -44,13 +44,16 @@ A Django REST Framework project for managing movies, running in Docker.
 ## 🔧 Common Commands
 
 - **Apply Migrations**:
-   docker-compose exec web python manage.py migrate
+   docker-compose exec backend python manage.py migrate
 
 - **Create a Superuser**:
-   docker-compose exec web python manage.py createsuperuser
+   docker-compose exec backend python manage.py createsuperuser
 
-- **View Logs**:
-   docker-compose logs web
+- **View Backend Logs**:
+   docker-compose logs backend
+
+- **View Frontend Logs**:
+   docker-compose logs frontend
 
 - **Stop Containers**:
    docker-compose down
@@ -59,7 +62,41 @@ A Django REST Framework project for managing movies, running in Docker.
 
 ## 🛠️ Development Notes
 
-- Make sure `.env` is not tracked in version control. Use `.gitignore` to exclude it.
+- Ensure `.env` is **not tracked** in version control. Use `.gitignore` to exclude it.
 - Use `docker-compose.override.yml` for local development configurations if needed.
+- The frontend is built using **Vite**, and the backend is powered by **Django REST Framework**.
 
 ---
+
+## 📂 Project Structure
+
+fullstack-docker-template/
+├── backend/        # Django backend (formerly movieproject)
+│   ├── backend/    # Django project files
+│   ├── manage.py   # Django CLI
+│   ├── requirements.txt
+│   ├── Dockerfile  # Backend Docker setup
+│   └── ...
+├── frontend/       # Frontend (Vite + React or Vue)
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── Dockerfile  # Frontend Docker setup
+│   └── ...
+├── docker-compose.yml  # Docker configuration
+├── .env.example   # Environment variables template
+└── README.md      # Project documentation
+
+---
+
+## ✅ Next Steps
+
+1. **Fork this repo** to start a new full-stack project.
+2. Modify **backend models & API endpoints** as needed.
+3. Customize **frontend UI & routes**.
+4. Deploy to **AWS, DigitalOcean, or Heroku** with `docker-compose`.
+
+---
+
+🚀 **This template helps you quickly start new full-stack projects with Docker!**  
+Let me know if you need changes before committing! 🔥

@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv()
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key')
-DEBUG = int(os.getenv('DEBUG', 1))
+DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

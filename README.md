@@ -14,7 +14,7 @@ A Dockerized Full Stack setup with Django REST Framework (DRF) for the backend a
 ## 🔧 Setup
 
 1. Clone the repository:
-   git clone https://github.com/yourusername/fullstack-docker-template.git
+   git clone https://github.com/ChimentiMatt/fullstack-docker-template.git
    cd fullstack-docker-template
 
 2. Create a `.env` file based on `.env.example`:

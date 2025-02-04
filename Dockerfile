@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the Django app using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "movieproject.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "backend.wsgi:application"]

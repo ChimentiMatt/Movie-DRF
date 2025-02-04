@@ -1,5 +1,7 @@
 # Full Stack Docker Template
 
+# TODO update readme to reflect Movie project 
+
 A Dockerized Full Stack setup with Django REST Framework (DRF) for the backend and a Vite-based frontend.
 
 ---

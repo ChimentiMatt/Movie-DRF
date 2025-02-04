@@ -1,16 +1,22 @@
 # Full Stack Docker Template
 
-# TODO update readme to reflect Movie project 
-
 A Dockerized Full Stack setup with Django REST Framework (DRF) for the backend and a Vite-based frontend.
 
 ---
+
+🛠️ Version Information
+- Docker: 27.4.0
+- Python: 3.13.1
+- Node.js: 20.17.0
+- Django: 4.0 or higher
+- Vite: 6.0.11
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop).
-
+- Python: Version 3.13.1 or higher (required for the Django backend)
+- Node.js: Version 20.17.0 or higher (required for the Vite frontend)
 ---
 
 ## 🔧 Setup
@@ -71,7 +77,7 @@ A Dockerized Full Stack setup with Django REST Framework (DRF) for the backend a
 ---
 
 ## 📂 Project Structure
-
+```
 fullstack-docker-template/
 ├── backend/        # Django backend (formerly movieproject)
 │   ├── backend/    # Django project files
@@ -88,17 +94,5 @@ fullstack-docker-template/
 ├── docker-compose.yml  # Docker configuration
 ├── .env.example   # Environment variables template
 └── README.md      # Project documentation
-
+```
 ---
-
-## ✅ Next Steps
-
-1. **Fork this repo** to start a new full-stack project.
-2. Modify **backend models & API endpoints** as needed.
-3. Customize **frontend UI & routes**.
-4. Deploy to **AWS, DigitalOcean, or Heroku** with `docker-compose`.
-
----
-
-🚀 **This template helps you quickly start new full-stack projects with Docker!**  
-Let me know if you need changes before committing! 🔥

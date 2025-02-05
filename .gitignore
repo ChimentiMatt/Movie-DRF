@@ -28,3 +28,6 @@ venv/
 
 # 🚀 Ignore PostgreSQL Data (Docker Volume)
 postgres_data/
+
+# 🚀 Ignore Csvs
+.csv

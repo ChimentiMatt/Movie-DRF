@@ -15,16 +15,13 @@ services:
 
   frontend:
     build:
-      context: ./frontend  # Ensure this is correct!
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/app  # Ensure the correct volume mapping
     stdin_open: true
     tty: true
-
 
   db:
     image: postgres:13

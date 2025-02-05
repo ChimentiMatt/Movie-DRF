@@ -97,3 +97,7 @@ fullstack-docker-template/
 ```
 ---
 Created by Matthew Chimenti: ChimentiMatt
+
+
+# Notes
+docker exec -it backend sh

@@ -4,7 +4,10 @@ import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
-  <header>
+  <div class="bg-blue-500 text-white p-4">
+    <h1 class="text-3xl font-bold">Tailwind is working!</h1>
+  </div>
+  <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
@@ -15,9 +18,9 @@ import HelloWorld from './components/HelloWorld.vue'
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
-  </header>
+  </header> -->
 
-  <RouterView />
+  <!-- <RouterView /> -->
 </template>
 
 <style scoped>

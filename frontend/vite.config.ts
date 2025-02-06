@@ -14,6 +14,7 @@ export default defineConfig({
     host: '0.0.0.0', // Ensures accessibility from Docker container
     port: 3000, // Matches docker-compose.yml port
     strictPort: true,
+    hmr: true,
     watch: {
       usePolling: true, // Fixes issues with file updates inside Docker
     },

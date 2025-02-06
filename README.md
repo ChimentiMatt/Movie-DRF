@@ -101,3 +101,7 @@ Created by Matthew Chimenti: ChimentiMatt
 
 # Notes
 docker exec -it backend sh
+docker exec -it backend python manage.py makemigrations
+
+docker-compose down
+docker-compose up --build

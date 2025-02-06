@@ -30,4 +30,6 @@ venv/
 postgres_data/
 
 # 🚀 Ignore Csvs
-.csv
+*.csv
+csv/
+

@@ -16,7 +16,12 @@ A project initiated on **February 4th**, designed to be a **strong portfolio pie
 More updates to come! 🚀
 
 
-### This repo was Made from my own Template that for now is below
+### This repo was created from my own Django Vue Template that for now is included below
+
+
+
+
+
 
 # Full Stack Docker Template
 

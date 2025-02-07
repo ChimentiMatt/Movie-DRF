@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'people',
     'production',
     'ratings',
+    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,4 +1,5 @@
 from django.db import models
+from people.models import Person
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
@@ -6,8 +7,8 @@ class Movie(models.Model):
     overview = models.TextField(blank=True, null=True)
     release_date = models.DateField(blank=True, null=True)
     runtime = models.FloatField(blank=True, null=True)
-    budget = models.BigIntegerField(blank=True, null=True)
-    revenue = models.BigIntegerField(blank=True, null=True)
+    budget = models.IntegerField(blank=True, null=True)
+    revenue = models.IntegerField(blank=True, null=True)
     vote_average = models.FloatField(blank=True, null=True)
     vote_count = models.IntegerField(blank=True, null=True)
     popularity = models.FloatField(blank=True, null=True)
@@ -17,6 +18,12 @@ class Movie(models.Model):
     tagline = models.TextField(blank=True, null=True)
     adult = models.BooleanField(default=False)
     video = models.BooleanField(default=False)
+
+    # ManyToMany Relationships for People Involved
+    actors = models.ManyToManyField(Person, through="Cast", related_name="acted_movies")
+    crew = models.ManyToManyField(Person, through="Crew", related_name="crew_movies")
+
+    csv_id = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.title

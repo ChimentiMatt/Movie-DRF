@@ -1,21 +1,22 @@
 <template>
-  <header class="bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-200 flex justify-between p-4">
+  <header class="bg-gray-100 dark:bg-[#0A0A0A] text-black dark:text-[#F5F5F5] flex justify-between p-4 pl-[5rem] pr-[5rem]">
     <h1>LOGO</h1>
+
     <nav class="flex gap-4">
       <input type="text" placeholder="Search..."
-        class="border px-2 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-      <a href="#" class="text-blue-500 dark:text-blue-300">Settings</a>
+        class="border px-2 rounded dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+      <a href="#" class="">Login</a>
 
       <button @click="toggleTheme">
         <p v-if="!isDark" class="w-6 h-6">🌑</p>
-       
         <p v-if="isDark" class="w-6 h-6">☀️</p>
       </button>
     </nav>
+
   </header>
 </template>
-<script>
 
+<script>
 export default {
   data() {
     return {

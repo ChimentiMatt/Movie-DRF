@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from movies.views import movie_list, movie_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("movies/", movie_list, name="movie_list"),  # List of movies
+    path("movies/<int:movie_id>/", movie_detail, name="movie_detail"),  # Single movie details
 ]
 
 if settings.DEBUG:

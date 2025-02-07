@@ -1,32 +1,26 @@
 from django.db import models
 from django.contrib.auth.models import User
-from movies.models import Movie 
 
-# Create your models here.
-class Person(models.Model): # Represents an individual in the movie industry
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)  # Link to User model (not required)
+class Person(models.Model):  # ✅ Ensure this model exists!
     name = models.CharField(max_length=255)
-    gender = models.IntegerField(blank=True, null=True)  # 0: Unknown, 1: Female, 2: Male
-    profile_path = models.URLField(blank=True, null=True)  # Optional profile image
 
     def __str__(self):
         return self.name
 
-class Cast(models.Model): # actors
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    character = models.CharField(max_length=255, blank=True, null=True)  # Role played
-    order = models.IntegerField(blank=True, null=True)  # Order in credits
+# Create your models here.
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    person = models.OneToOneField("people.Person", on_delete=models.SET_NULL, null=True, blank=True, related_name="profile")
+
+class MoviePerson(models.Model):  
+    movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE)
+    person = models.ForeignKey("people.Person", on_delete=models.CASCADE)
+    role = models.CharField(max_length=255, blank=True, null=True)  # Role played (for actors)
+    job = models.CharField(max_length=255, blank=True, null=True)  # Job title (for crew)
+    department = models.CharField(max_length=255, blank=True, null=True)  # Department (for crew)
+
+    class Meta:
+        unique_together = ("movie", "person", "role", "job")  # Prevents duplicate entries
 
     def __str__(self):
-        return f"{self.person.name} as {self.character} in {self.movie.title}"
-
-class Crew(models.Model): # Represents crew members/ director (NOT actors)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    job = models.CharField(max_length=255)  # Job title (e.g., Director, Writer)
-    department = models.CharField(max_length=255)  # Department (e.g., Writing, Directing)
-
-    def __str__(self):
-        return f"{self.person.name} - {self.job} ({self.department}) in {self.movie.title}"
-        
+        return f"{self.person.name} - {self.role or self.job} in {self.movie.title}"

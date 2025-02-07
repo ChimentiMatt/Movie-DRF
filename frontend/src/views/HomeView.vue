@@ -1,12 +1,13 @@
 <template>
   <main class="flex flex-col justify-center dark:bg-[#121212] p-[5rem]">
     <!-- Carousel Section -->
-    <div class="flex justify-between h-[20rem] relative overflow-hidden">
+    <div class="flex justify-between h-[30rem] relative overflow-hidden">
       <Carousel />
-      <UpNext  />
+      <UpNext />
     </div>
 
     <IconicCelebs />
+    <Test />
 
   </main>
 </template>
@@ -15,12 +16,14 @@
 import Carousel from "@/components/Carousel.vue";
 import IconicCelebs from "@/components/IconicCelebs.vue";
 import UpNext from "@/components/UpNext.vue";
+import Test from "@/components/Test.vue";
 
 export default {
   components: {
     Carousel,
     UpNext,
     IconicCelebs,
+    Test,
   },
   data() {
     return {

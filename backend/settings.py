@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'production',
     'ratings',
     'core',
+    "corsheaders",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +53,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True  # ✅ Use only in development
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Vue Vite default port
+    "http://127.0.0.1:8000",  # Django backend
 ]
 
 ROOT_URLCONF = 'backend.urls'

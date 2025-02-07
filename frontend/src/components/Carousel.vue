@@ -2,12 +2,16 @@
   <div class="relative h-full overflow-hidden">
     <div class="flex transition-transform duration-500 ease-in-out h-full"
       :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-      <div v-for="(slide, index) in slides" :key="index" class="w-full flex-shrink-0 h-full relative rounded-lg overflow-hidden">
-        <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover" />
+
+      <div v-for="(movie, index) in movies" :key="index"
+        class="flex justify-center items-center flex-shrink-0 w-full h-full relative rounded-lg overflow-hidden">
+
+        <!-- Centered Image with Aspect Ratio Handling -->
+        <img :src="movie.poster_url" :alt="movie.title" class="max-h-full max-w-full object-contain" />
 
         <!-- Side Title and border bottom effect -->
         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-          <h2 class="text-white text-2xl font-bold">{{ slide.title }}</h2>
+          <h2 class="text-white text-2xl font-bold">{{ movie.title }}</h2>
         </div>
       </div>
     </div>
@@ -25,28 +29,33 @@
 </template>
 
 <script>
+import movieService from "../api/movieService.js";
+
 export default {
   data() {
     return {
       currentIndex: 0,
-      slides: [
-        { title: "Inception", image: "https://www.movieposterdb.com/posters/12_05/2008/468569/l_468569_0c3a3b3b.jp" },
-        { title: "The Dark Knight", image: "https://www.movieposterdb.com/posters/12_05/2008/468569/l_468569_0c3a3b3b.jpg" },
-        { title: "Interstellar", image: "https://www.movieposterdb.com/posters/12_05/2008/468569/l_468569_0c3a3b3b.jp" },
-      ],
+      movies: [],
     };
+  },
+  async created() {
+    try {
+      this.movies = await movieService.getMovies();
+    } catch (err) {
+      console.error("Failed to fetch movies:", err);
+    }
   },
   methods: {
     nextSlide() {
-      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+      this.currentIndex = (this.currentIndex + 1) % this.movies.length;
     },
     prevSlide() {
-      this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+      this.currentIndex = (this.currentIndex - 1 + this.movies.length) % this.movies.length;
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add any additional styling if needed */
+/* Add additional styling if needed */
 </style>

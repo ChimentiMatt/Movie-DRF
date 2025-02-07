@@ -3,14 +3,15 @@
 A project initiated on **February 4th**, designed to be a **strong portfolio piece**, showcasing expertise in backend development, API design, and full-stack integration.
 
 ## 📌 MVP Goals
-- ✅ **Migrate** over **350,000 rows** of CSV data from the **TMDB Movie Dataset** ([Kaggle](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)).
-- ✅ **Develop a fast, well-structured API** for movie data, including movies, cast, crew, ratings, and metadata.
-- ✅ **Build an IMDb-style web app interface** to showcase frontend integration.
-- ✅ **Implement a user system** that allows actors to link their profiles if they are listed in the database.
-- ✅ **Deploy on AWS** for scalability and real-world deployment experience.
+- **Migrate** over **350,000 rows** of CSV data from the **TMDB Movie Dataset** ([Kaggle](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)).
+- **Develop a fast, well-structured API** for movie data, including movies, cast, crew, ratings, and metadata.
+- **Build an IMDb-style web app interface** to showcase frontend integration.
+- **Implement a user system** that allows actors to link their profiles if they are listed in the database.
+- **Deploy on AWS** for scalability and real-world deployment experience.
 
 ## 🚀 Post-MVP Features
 - 🔹 **Implement Machine Learning**: Use **linear regression** to power a **recommendation system** and enhance the "like" system while learning more about **ML applications**.
+- 🔹 **Comprehensive Test Coverage**
 - 🔹 **Expand functionality** with additional features (to be determined).
 
 More updates to come! 🚀
@@ -133,3 +134,10 @@ docker-compose up --build
 
 docker-compose down
 docker-compose up
+
+
+
+can get celeb pics from wikipedia 
+https://en.wikipedia.org/w/api.php?action=query&titles=Robin_Williams&prop=pageimages&format=json&pithumbsize=500
+
+response will have source with url

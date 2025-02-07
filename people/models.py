@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Person(models.Model):  # ✅ Ensure this model exists!
+class Person(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -13,11 +13,23 @@ class Profile(models.Model):
     person = models.OneToOneField("people.Person", on_delete=models.SET_NULL, null=True, blank=True, related_name="profile")
 
 class MoviePerson(models.Model):  
+    class Role(models.TextChoices):
+        ACTOR = 'ACT', 'Actor'
+        DIRECTOR = 'DIR', 'Director'
+        CREW = 'CRW', 'Crew'
+        PRODUCER = 'PRO', 'Producer'
+        WRITER = 'WRT', 'Writer'
+        OTHER = 'OTH', 'Other'
+
     movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE)
     person = models.ForeignKey("people.Person", on_delete=models.CASCADE)
-    role = models.CharField(max_length=255, blank=True, null=True)  # Role played (for actors)
     job = models.CharField(max_length=255, blank=True, null=True)  # Job title (for crew)
     department = models.CharField(max_length=255, blank=True, null=True)  # Department (for crew)
+    role = models.CharField(
+        max_length=3,
+        choices=Role.choices,
+        default=Role.OTHER,
+    )
 
     class Meta:
         unique_together = ("movie", "person", "role", "job")  # Prevents duplicate entries

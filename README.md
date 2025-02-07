@@ -135,6 +135,7 @@ docker-compose up --build
 docker-compose down
 docker-compose up
 
+docker-compose restart backend
 
 
 can get celeb pics from wikipedia 

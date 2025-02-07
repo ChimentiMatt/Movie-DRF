@@ -13,6 +13,21 @@ export const movieService = {
     }
   },
 
+  async getMovieRankingList(page = 1, searchQuery = '') {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/movies-ranking-list/`, {
+        params: {
+          page,
+          search: searchQuery,  // Pass search query to backend
+        },
+      });
+      return response.data;  // Return the response data (movie and pagination metadata)
+    } catch (error) {
+      console.error("Error fetching movie ranking list:", error);
+      throw error;
+    }
+  },
+
   async getMovieById(movieId) {
     try {
       const response = await axios.get(`${API_BASE_URL}/movies/${movieId}/`);

@@ -7,7 +7,9 @@
         class="flex justify-center items-center flex-shrink-0 w-full h-full relative rounded-lg overflow-hidden">
 
         <!-- Centered Image with Aspect Ratio Handling -->
-        <img :src="movie.poster_url" :alt="movie.title" class="max-h-full max-w-full object-contain" />
+        <router-link :to="'/movie/' + movie.id">
+          <img :src="movie.poster_url" :alt="movie.title" class="max-h-full max-w-full object-contain" />
+        </router-link>
 
         <!-- Side Title and border bottom effect -->
         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
@@ -55,7 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Add additional styling if needed */
-</style>

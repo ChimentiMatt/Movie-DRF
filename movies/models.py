@@ -28,7 +28,6 @@ class Movie(models.Model):
     people = models.ManyToManyField("people.Person", through="people.MoviePerson", related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
 
-
     def get_poster_url(self, size="w500"):
             """Returns a complete TMDB poster URL or a placeholder if not available."""
             if self.poster_path:

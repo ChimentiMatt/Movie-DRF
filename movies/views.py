@@ -36,6 +36,9 @@ def movie_ranking_list(request):
     if search_query:
         movies = movies.filter(title__icontains=search_query)  # Search by movie title
 
+    # Order by vote_average in descending order (highest vote first)
+    movies = movies.order_by('-vote_average')
+
     # Set up pagination: show one movie per page
     paginator = Paginator(movies, 2)  # One movie per page
 

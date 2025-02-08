@@ -12,6 +12,8 @@ services:
       - .:/app
     environment:
       - DEBUG=True
+      - PYTHONUNBUFFERED=1  # Disable output buffering
+    command: gunicorn --bind 0.0.0.0:8000 --capture-output --log-level debug --no-sendfile backend.wsgi:application
     depends_on:
       - db
 

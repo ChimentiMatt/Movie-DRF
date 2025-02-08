@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col justify-center dark:bg-[#121212] p-[5rem]">
+  <main class="flex flex-col justify-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
     <!-- Carousel Section -->
     <div class="flex justify-between h-[30rem] relative overflow-hidden">
       <Carousel />

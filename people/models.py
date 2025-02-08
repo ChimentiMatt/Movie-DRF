@@ -3,11 +3,20 @@ from django.contrib.auth.models import User
 
 class Person(models.Model):
     name = models.CharField(max_length=255)
+    
+    # Values that originally come from TMDB API. On first get post to model
+    biography = models.TextField(blank=True, null=True)
+    gender = models.IntegerField(blank=True, null=True) # 1 - 4 from api
+    birthday = models.DateField(blank=True, null=True)  # Example: "1944-05-14"
+    deathday = models.DateField(blank=True, null=True)
+    place_of_birth = models.CharField(max_length=255, blank=True, null=True)
+    known_for_department = models.CharField(max_length=255, blank=True, null=True)
+    headshot_url = models.CharField(max_length=255, blank=True, null=True)
+    tmdb_id = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-# Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     person = models.OneToOneField("people.Person", on_delete=models.SET_NULL, null=True, blank=True, related_name="profile")

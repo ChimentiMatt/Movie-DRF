@@ -137,6 +137,8 @@ docker-compose up
 
 docker-compose restart backend
 
+ docker-compose logs -f
+
 
 can get celeb pics from wikipedia 
 https://en.wikipedia.org/w/api.php?action=query&titles=Robin_Williams&prop=pageimages&format=json&pithumbsize=500

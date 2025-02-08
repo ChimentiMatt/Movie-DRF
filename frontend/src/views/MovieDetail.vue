@@ -1,6 +1,5 @@
 <template>
-  <div v-if="movie"
-    class="flex justify-center items-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
+  <div v-if="movie" class="flex justify-center items-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
 
     <!-- Main Movie Section --> <!-- needs RD after UI plan is finalized-->
     <section class="w-[50rem] flex flex-col gap-6">
@@ -30,10 +29,12 @@
       <div class="flex gap-2">
         <h1 class="font-bold ">Stars</h1>
         <div v-for="person in movie.people">
-          <p v-if="person.job === 'Actor' ">{{ person.name }}</p>
+          <router-link :to="`/person/${person.name}`">
+            <p v-if="person.job === 'Actor'">{{ person.name }}</p>
+
+          </router-link>
         </div>
       </div>
-        
     </section>
   </div>
 

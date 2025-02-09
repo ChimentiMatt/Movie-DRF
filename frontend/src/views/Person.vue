@@ -61,7 +61,6 @@ export default {
         console.error("Error fetching actor data:", error);
       } finally {
         this.loading = false
-        console.log(this.person.name)
         this.fetchPersonsMoviesData()
       }
     },
@@ -70,7 +69,6 @@ export default {
       try {
         const personsMoviesData = await personService.getPersonsMovies(this.person.name);
         this.personsMovies = personsMoviesData['movies'];  // Update actor data in the component
-        console.log('!', this.personsMovies)
       } catch (error) {
         console.error("Error fetching actor data:", error);
       } finally {

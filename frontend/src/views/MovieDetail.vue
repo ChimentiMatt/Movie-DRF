@@ -14,12 +14,12 @@
         </div>
       </header>
 
-    <!-- Movie Poster and Trailer -->
-    <div class="flex justify-between ">
-      <MovieTrailer :title="movieTitle" />
-      <img :src="movie.poster_url" alt="Movie Poster" class="h-[315px] w-[210px] object-cover" />
+      <!-- Movie Poster and Trailer -->
+      <div class="flex justify-between ">
+        <MovieTrailer :title="movieTitle" />
+        <img :src="movie.poster_url" alt="Movie Poster" class="h-[315px] w-[210px] object-cover" />
 
-    </div>
+      </div>
 
       <div class="flex flex-row space-x-2">
         <div v-for="genre in movie.genres" :key="genre">
@@ -37,7 +37,7 @@
         <h1 class="font-bold ">Stars</h1>
         <div v-for="person in movie.people" :key="person.name">
           <router-link :to="`/person/${person.name}`">
-            <p v-if="person.job === 'Actor'">{{ person.name }}</p>
+            <p v-if="person.job === 'ACT'">{{ person.name }}</p>
           </router-link>
         </div>
       </div>

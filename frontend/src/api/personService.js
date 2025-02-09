@@ -15,10 +15,8 @@ export const personService = {
   },
 
   async getPersonsMovies(personName) {
-    console.log(personName)
     try {
       const response = await axios.get(`${API_BASE_URL}/persons-movies/${personName}/`);  // Adjust URL to match Django's route
-      console.log('in', response)
       return response.data;  // Return actor data
     } catch (error) {
       console.error(`Error fetching actor ${personName}:`, error);

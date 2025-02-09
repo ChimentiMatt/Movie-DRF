@@ -1,13 +1,8 @@
 <template>
   <div class="dark:bg-[#121212] dark:text-[#F5F5F5] pl-[5rem] pr-[5rem] pt-[1.5rem]">
     <!-- Search Box -->
-    <input
-      v-model="searchQuery"
-      type="text"
-      placeholder="Search for a movie..."
-      @input="loadPage(1)"
-      class="search-box bg-gray-100 text-black dark:text-white rounded border-2 border-black dark:border-white dark:bg-[#121212]"
-      />
+    <input v-model="searchQuery" type="text" placeholder="Search for a movie..." @input="loadPage(1)"
+      class="search-box bg-gray-100 text-black dark:text-white rounded border-2 border-black dark:border-white dark:bg-[#121212]" />
 
     <!-- Movie Rankings Table -->
     <div v-if="movies.length">
@@ -21,7 +16,8 @@
         </thead>
         <tbody>
           <!-- Display movies -->
-          <tr v-for="movie in movies" :key="movie.id" @click="goToMovieDetails(movie.id)" class="group hover:bg-blue-500">
+          <tr v-for="movie in movies" :key="movie.id" @click="goToMovieDetails(movie.id)"
+            class="group hover:bg-blue-500">
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.title }}</td>
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.vote_average }}</td>
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.release_date }}</td>
@@ -102,12 +98,14 @@ export default {
 }
 
 .movie-table tr:nth-child(odd) {
-  background-color: #f9f9f9; /* Alternate row colors */
+  background-color: #f9f9f9;
+  /* Alternate row colors */
   color: black;
 }
 
 .movie-table tr:nth-child(even) {
-  background-color: #272727; /* Alternate row colors */
+  background-color: #272727;
+  /* Alternate row colors */
   color: white;
 }
 

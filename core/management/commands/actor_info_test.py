@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand
 import requests
+import os
 
 class Command(BaseCommand):
     help = "Runs a one-time script to import data from a CSV file"
 
     def handle(self, *args, **kwargs):
         print("Executing script1...")
-        import os
         print(os.environ)  # Debug: print all environment variables
 
         try:

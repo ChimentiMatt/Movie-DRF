@@ -2,7 +2,7 @@
   <header class="flex justify-between bg-gray-100 dark:bg-[#0A0A0A] text-black dark:text-[#F5F5F5] p-4 pl-[5rem] pr-[5rem]">
 
     <router-link :to="'/'">
-      <p>LOGO</p>
+      <p>MovieForge</p>
     </router-link>
 
     <nav class="flex gap-4">

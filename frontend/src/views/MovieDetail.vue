@@ -1,21 +1,28 @@
 <template>
   <div v-if="movie" class="flex justify-center items-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
 
-    <!-- Main Movie Section --> <!-- needs RD after UI plan is finalized-->
+    <!-- Main Movie Section -->
     <section class="w-[50rem] flex flex-col gap-6">
       <header>
         <h1 class="text-4xl font-bold  mb-4">{{ movie.title }}</h1>
-        <p>{{ movie.runtime }}m </p>
+        <div class="flex justify-between">
+
+          <p>Runtime: {{ movie.runtime }}m</p>
+          <p>Rating: {{ movie.vote_average }}</p>
+          <p>Release Date: {{ movie.release_date }}</p>
+          <p>Revenue: ${{ movie.revenue }}</p>
+        </div>
       </header>
 
-      <!-- Movie Poster and Trailer -->
-      <div class="flex justify-between">
-        <img :src="movie.poster_url" alt="Movie Poster" />
-        <div class="bg-black w-[20rem]"> Trailer Here</div>
-      </div>
+    <!-- Movie Poster and Trailer -->
+    <div class="flex justify-between ">
+      <MovieTrailer :title="movieTitle" />
+      <img :src="movie.poster_url" alt="Movie Poster" class="h-[315px] w-[210px] object-cover" />
+
+    </div>
 
       <div class="flex flex-row space-x-2">
-        <div v-for="genre in movie.genres">
+        <div v-for="genre in movie.genres" :key="genre">
           <p class="border-2 rounded p-2">
             {{ genre }}
           </p>
@@ -28,10 +35,9 @@
 
       <div class="flex gap-2">
         <h1 class="font-bold ">Stars</h1>
-        <div v-for="person in movie.people">
+        <div v-for="person in movie.people" :key="person.name">
           <router-link :to="`/person/${person.name}`">
             <p v-if="person.job === 'Actor'">{{ person.name }}</p>
-
           </router-link>
         </div>
       </div>
@@ -46,15 +52,18 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import movieService from '../api/movieService';
+import MovieTrailer from '@/components/MovieTrailer.vue';
 
 export default {
+  components: {
+    MovieTrailer,
+  },
   props: ['id'], // Receiving the movie ID as a prop from the router
   setup(props) {
     const movie = ref(null);
 
-    // Fetch movie details when the component is mounted
     onMounted(async () => {
       try {
         movie.value = await movieService.getMovieById(props.id);
@@ -63,7 +72,10 @@ export default {
       }
     });
 
-    return { movie };
+    // Define computed property for dynamic movie title
+    const movieTitle = computed(() => movie.value ? movie.value.title : 'Loading...');
+
+    return { movie, movieTitle };
   },
 };
 </script>

@@ -32,6 +32,7 @@ services:
       environment:
         - VITE_API_BASE_URL=http://localhost:8000  # Development API URL (change this for production)
         - VITE_HMR=true  # Hot Module Replacement flag (for development)
+        - VITE_TMDB_API_KEY=${VITE_TMDB_API_KEY} 
       command: npm run dev  # Start the Vite dev server
       depends_on:
         - backend  # Ensure the backend service is available

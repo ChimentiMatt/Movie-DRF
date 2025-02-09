@@ -32,9 +32,9 @@ class MoviePerson(models.Model):
 
     movie = models.ForeignKey("movies.Movie", on_delete=models.CASCADE)
     person = models.ForeignKey("people.Person", on_delete=models.CASCADE)
-    job = models.CharField(max_length=255, blank=True, null=True)  # Job title (for crew)
+    role = models.CharField(max_length=255, blank=True, null=True)  # Job title (for crew)
     department = models.CharField(max_length=255, blank=True, null=True)  # Department (for crew)
-    role = models.CharField(
+    job = models.CharField(
         max_length=3,
         choices=Role.choices,
         default=Role.OTHER,

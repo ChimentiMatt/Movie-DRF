@@ -1,7 +1,11 @@
-from django.http import JsonResponse
 import os
 import requests
-from .models import Person
+from rest_framework.response import Response
+from django.http import JsonResponse
+from .models import Person, MoviePerson
+from movies.models import Movie
+from movies.serializers import PersonMovieSerializer
+
 
 def post_tmdb_data_to_person(person_data):
     '''Helper function to update or create person data in the DB'''
@@ -87,4 +91,9 @@ def get_person(request, name):
     
     else:
         return JsonResponse({"error": f"Failed to retrieve actor details"}, status=404)
-  
+
+def get_persons_movies(request, name):
+    person = Person.objects.get(name=name)
+    serializer = PersonMovieSerializer(person)
+
+    return JsonResponse(serializer.data)

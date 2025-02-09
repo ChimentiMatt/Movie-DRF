@@ -4,15 +4,24 @@ const API_BASE_URL = import.meta.env.VUE_APP_API_BASE_URL || "http://localhost:8
 
 export const personService = {
 
-
-  // New method to fetch actor data by ID
   async getPerson(personName) {
     try {
       const response = await axios.get(`${API_BASE_URL}/person/${personName}/`);  // Adjust URL to match Django's route
-      console.log('in', response)
       return response.data;  // Return actor data
     } catch (error) {
       console.error(`Error fetching actor ID ${personId}:`, error);
+      throw error;
+    }
+  },
+
+  async getPersonsMovies(personName) {
+    console.log(personName)
+    try {
+      const response = await axios.get(`${API_BASE_URL}/persons-movies/${personName}/`);  // Adjust URL to match Django's route
+      console.log('in', response)
+      return response.data;  // Return actor data
+    } catch (error) {
+      console.error(`Error fetching actor ${personName}:`, error);
       throw error;
     }
   },

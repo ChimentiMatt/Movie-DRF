@@ -7,6 +7,7 @@ A project initiated on **February 4th**, designed to be a **strong portfolio pie
 - **Develop a fast, well-structured API** for movie data, including movies, cast, crew, ratings, and metadata.
 - **Build an IMDb-style web app interface** to showcase frontend integration.
 - **Implement a user system** that allows actors to link their profiles if they are listed in the database.
+- **Automate population of API with new movies/actors** Daily populate the database with new data so that new movies and actors can be present in the API and Web app and the Dashboard of the web app can be topical.
 - **Deploy on AWS** for scalability and real-world deployment experience.
 
 ## 🚀 Post-MVP Features
@@ -137,7 +138,7 @@ docker-compose up
 
 docker-compose restart backend
 
- docker-compose logs -f
+docker-compose logs -f
 
 
 can get celeb pics from wikipedia 

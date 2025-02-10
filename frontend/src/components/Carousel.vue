@@ -1,32 +1,45 @@
 <template>
-  <div class="relative h-full overflow-hidden">
-    <div class="flex transition-transform duration-500 ease-in-out h-full"
-      :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+  <div class="flex flex-col">
 
-      <div v-for="(movie, index) in movies" :key="index"
-        class="flex justify-center items-center flex-shrink-0 w-full h-full relative rounded-lg overflow-hidden">
+    <h1 class="mb-2 ml-[2.5rem] text-4xl font-bold">In Theatres</h1>
 
-        <!-- Centered Image with Aspect Ratio Handling -->
-        <router-link :to="'/movie/' + movie.id">
-          <img :src="movie.poster_url" :alt="movie.title" class="max-h-full max-w-full object-contain" />
-        </router-link>
+    <div class="relative overflow-hidden font-bold" @mouseenter="pauseCarousel" @mouseleave="startCarousel">
+      <div class="flex w-[290px] transition-transform duration-500 ease-in-out h-full"
+        :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+        <div v-for="(movie, index) in movies" :key="index"
+          class="flex justify-center items-center flex-shrink-0 w-full relative  overflow-hidden">
 
-        <!-- Side Title and border bottom effect -->
-        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-          <h2 class="text-white text-2xl font-bold">{{ movie.title }}</h2>
+          <router-link :to="'/movie/' + movie.id">
+            <img :src="movie.poster_url" :alt="movie.title"
+              class="h-[315px] w-[210px] rounded rounded-lg object-cover object-contain hover:opacity-60"/>
+          </router-link>
+      
         </div>
       </div>
+
+      <!-- Navigation Buttons -->
+      <button @click="prevSlide"
+        class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-900 bg-opacity-50 p-2 rounded-full text-blue-500">
+        &#10094;
+      </button>
+      <button @click="nextSlide"
+        class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-200 dark:bg-gray-900 bg-opacity-50 p-2 rounded-full text-blue-500">
+        &#10095;
+      </button>
     </div>
 
-    <!-- Navigation Buttons -->
-    <button @click="prevSlide"
-      class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white">
-      &#10094;
-    </button>
-    <button @click="nextSlide"
-      class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-50 p-2 rounded-full text-white">
-      &#10095;
-    </button>
+    <!-- Dots (Indicators) -->
+    <div class="flex justify-center mt-2 gap-1">
+      <span v-for="(movie, index) in movies" :key="index" @click="goToSlide(index)"
+        class="w-[3.5px] h-[3.5px] rounded-full cursor-pointer transition-all"
+        :class="index === currentIndex ? 'bg-blue-400' : 'bg-gray-400'">
+      </span>
+    </div>
+
+    <!-- Movie Title -->
+    <div v-for="item in moviesIndex" :key="item.index" class="flex justify-center mt-1">
+      <h1 v-if="item.index === currentIndex" class="absolute font-bold ">{{ item.title }}</h1>
+    </div>
   </div>
 </template>
 
@@ -38,11 +51,18 @@ export default {
     return {
       currentIndex: 0,
       movies: [],
+      moviesIndex: [],
+      intervalId: null,
     };
   },
   async created() {
     try {
-      this.movies = await movieService.getMovies();
+      this.movies = await movieService.getInTheatreMovies();
+      this.moviesIndex = this.movies.map((movie, index) => ({
+        index,
+        title: movie.title,
+      }));
+      this.startCarousel();
     } catch (err) {
       console.error("Failed to fetch movies:", err);
     }
@@ -54,6 +74,23 @@ export default {
     prevSlide() {
       this.currentIndex = (this.currentIndex - 1 + this.movies.length) % this.movies.length;
     },
+    goToSlide(index) {
+      this.currentIndex = index;
+      this.pauseCarousel();
+      this.startCarousel();
+    },
+    startCarousel() {
+      if (!this.intervalId) {
+        this.intervalId = setInterval(this.nextSlide, 3000);
+      }
+    },
+    pauseCarousel() {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   },
+  beforeUnmount() {
+    clearInterval(this.intervalId);
+  }
 };
 </script>

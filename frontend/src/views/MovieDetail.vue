@@ -1,25 +1,26 @@
 <template>
-  <div v-if="movie" class="flex justify-center items-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
+  <div v-if="movie" class="flex justify-center items-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] pt-[2rem]">
 
     <!-- Main Movie Section -->
     <section class="w-[50rem] flex flex-col gap-6">
       <header>
-        <h1 class="text-4xl font-bold  mb-4">{{ movie.title }}</h1>
+        <h1 class="text-4xl font-bold mb-4">{{ movie.title }}</h1>
         <div class="flex justify-between">
 
           <p>Runtime: {{ movie.runtime }}m</p>
           <p>Rating: {{ movie.vote_average }}</p>
           <p>Release Date: {{ movie.release_date }}</p>
           <p>Revenue: ${{ movie.revenue }}</p>
+          <p>Mpaa {{movie.mpaa_rating }}</p>
         </div>
       </header>
 
       <!-- Movie Poster and Trailer -->
       <div class="flex justify-between ">
-        <MovieTrailer :title="movieTitle" />
-        <img :src="movie.poster_url" alt="Movie Poster" class="h-[315px] w-[210px] object-cover" />
-
+        <MovieTrailer :title="movieTitle" class="rounded"/>
+        <img :src="movie.poster_url" alt="Movie Poster" class="h-[315px] w-[210px] object-cover rounded custom-shadow" />
       </div>
+
 
       <div class="flex flex-row space-x-2">
         <div v-for="genre in movie.genres" :key="genre">

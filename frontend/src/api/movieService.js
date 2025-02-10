@@ -3,10 +3,27 @@ import axios from "axios";
 const API_BASE_URL = import.meta.env.VUE_APP_API_BASE_URL || "http://localhost:8000"; // Default to local if not set
 
 export const movieService = {
-  async getMovies() {
+  async getUpcomingMovies(limit = null) {
     try {
-      const response = await axios.get(`${API_BASE_URL}/movies/`);
-      return response.data.movies; // Return only movie data
+      let url = `${API_BASE_URL}/upcoming-movies/`;
+
+      // Append limit as a query parameter if provided
+      if (limit) {
+        url += `?limit=${limit}`;
+      }
+
+      const response = await axios.get(url);
+      return response.data.movies;
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+      throw error;
+    }
+  },
+
+  async getInTheatreMovies() {
+    try {
+      const response = await axios.get(`${API_BASE_URL}/in-theatres-movies/`);
+      return response.data.movies;
     } catch (error) {
       console.error("Error fetching movies:", error);
       throw error;
@@ -18,10 +35,10 @@ export const movieService = {
       const response = await axios.get(`${API_BASE_URL}/movies-ranking-list/`, {
         params: {
           page,
-          search: searchQuery,  // Pass search query to backend
+          search: searchQuery,
         },
       });
-      return response.data;  // Return the response data (movie and pagination metadata)
+      return response.data;
     } catch (error) {
       console.error("Error fetching movie ranking list:", error);
       throw error;

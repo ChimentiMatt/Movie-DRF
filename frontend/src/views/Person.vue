@@ -20,13 +20,34 @@
     <h1>Roles</h1>
     <h2>Upcoming</h2>
     <h2>Previous</h2>
-    <div v-for="movie in personsMovies" class="flex pl-2 gap-2">
-      {{ movie.title }}
-      <div v-for="movie in movie.movie_person">
-        <div v-if="movie.person_name === person.name">Role: {{ movie.role }}</div>
+
+    <div class="border border-gray-300 rounded-lg shadow-md p-4 mb-4">
+      <div v-for="movie in personsMovies" :key="movie.id" class=" pt-2 border-b border-gray-300 last:border-b-0">
+        <div class="flex justify-between items-center">
+          <div class="flex">
+            <!-- Movie Poster -->
+            <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title"
+              class="h-[5rem] object-cover object-contain" />
+
+            <!-- Movie Details -->
+            <div class="flex flex-col pl-4 gap-2">
+              <p class="font-bold">{{ movie.title }}</p>
+              <p>⭐ {{ movie.vote_average }}</p>
+
+              <!-- Display Person's Role in the Movie -->
+              <div v-for="personRole in movie.movie_person" :key="personRole.id">
+                <div v-if="personRole.person_name === person.name">Role: {{ personRole.role }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Release Date -->
+          <p>{{ movie.release_date }}</p>
+        </div>
       </div>
-      <p>Rating: {{ movie.vote_average }}</p>
     </div>
+
+
 
   </div>
 
@@ -69,6 +90,7 @@ export default {
       try {
         const personsMoviesData = await personService.getPersonsMovies(this.person.name);
         this.personsMovies = personsMoviesData['movies'];  // Update actor data in the component
+        console.log(this.personsMovies)
       } catch (error) {
         console.error("Error fetching actor data:", error);
       } finally {

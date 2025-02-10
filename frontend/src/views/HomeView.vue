@@ -1,9 +1,9 @@
 <template>
-  <main class="flex flex-col justify-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[5rem]">
-    <!-- Carousel Section -->
-    <div class="flex justify-between h-[30rem] relative overflow-hidden">
+  <main class="flex flex-col justify-center dark:bg-[#121212] text-black dark:text-[#F5F5F5] p-[2rem]">
+
+    <div class="flex flex-col lg:flex-row justify-center ">
       <Carousel />
-      <UpNext />
+      <UpcomingMovies />
     </div>
 
     <IconicCelebs />
@@ -15,13 +15,13 @@
 <script>
 import Carousel from "@/components/Carousel.vue";
 import IconicCelebs from "@/components/IconicCelebs.vue";
-import UpNext from "@/components/UpNext.vue";
+import UpcomingMovies from "@/components/UpcomingMovies.vue"
 import Test from "@/components/Test.vue";
 
 export default {
   components: {
     Carousel,
-    UpNext,
+    UpcomingMovies,
     IconicCelebs,
     Test,
   },

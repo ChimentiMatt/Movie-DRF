@@ -7,6 +7,16 @@ class Genre(models.Model):
         return self.name
 
 class Movie(models.Model):
+    MPAA_RATINGS = [
+        ("G", "G - General Audiences"),
+        ("PG", "PG - Parental Guidance Suggested"),
+        ("PG-13", "PG-13 - Parents Strongly Cautioned"),
+        ("R", "R - Restricted"),
+        ("NC-17", "NC-17 - No One 17 and Under Admitted"),
+        ("Unrated", "Unrated - No official rating"),
+        ("N/A", "N/A - Not Applicable"),
+    ]
+
     title = models.CharField(max_length=255)
     original_title = models.CharField(max_length=255, blank=True, null=True)
     overview = models.TextField(blank=True, null=True)
@@ -22,6 +32,9 @@ class Movie(models.Model):
     status = models.CharField(max_length=50, blank=True, null=True)
     tagline = models.TextField(blank=True, null=True)
     adult = models.BooleanField(default=False)
+    mpaa_rating = models.CharField(
+        max_length=10, choices=MPAA_RATINGS, blank=True, null=True
+    )
     video = models.BooleanField(default=False)
     csv_id = models.IntegerField(blank=True, null=True)
 

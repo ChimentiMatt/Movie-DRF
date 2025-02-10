@@ -2,7 +2,8 @@ import os
 import requests
 from rest_framework.response import Response
 from django.http import JsonResponse
-from .models import Person, MoviePerson
+from django.db.models import Prefetch
+from .models import Person
 from movies.models import Movie
 from movies.serializers import PersonMovieSerializer
 
@@ -67,7 +68,7 @@ def get_person(request, name):
             'known_for_department': person.known_for_department,
             'headshot_url': person.headshot_url,
         }
-        return JsonResponse(person)  # Send the actor data as JSON
+        return JsonResponse(person)
     
     actor_id = get_person_data_from_api(name, API_KEY)
 
@@ -87,13 +88,15 @@ def get_person(request, name):
             'known_for_department': person.known_for_department,
             'headshot_url': person.headshot_url,
         }
-        return JsonResponse(person_data)  # Send the actor data as JSON
+        return JsonResponse(person_data) 
     
     else:
         return JsonResponse({"error": f"Failed to retrieve actor details"}, status=404)
 
 def get_persons_movies(request, name):
-    person = Person.objects.get(name=name)
+    person = Person.objects.prefetch_related(
+        Prefetch('movies', queryset=Movie.objects.order_by('-release_date'))
+    ).get(name=name)
     serializer = PersonMovieSerializer(person)
 
     return JsonResponse(serializer.data)

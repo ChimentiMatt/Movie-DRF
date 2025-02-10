@@ -1,16 +1,16 @@
 <template>
-  <div>
+  <div class="fixed flex top-0 left-0 w-[99vw] h-[100vh] z-50 bg-gradient-to-br from-black via-gray-900 to-transparent">
+    <p @click="$emit('update:modelValue', false)"
+      class="cursor-pointer text-white text-2xl absolute top-4 right-[5rem]">✖️
+    </p>
 
-    <!-- Display trailer if found -->
-    <div v-if="trailerUrl !== 'Trailer not available' || error" class="w-full " aria-hidden="true">
-      <iframe :src="trailerUrlWithParams" frameborder="0" class="rounded"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560"
-        height="315">
+    <div v-if="trailerUrl !== 'Trailer not available' || error" class="flex justify-center w-full items-center"
+      aria-hidden="true">
+      <iframe :src="trailerUrlWithParams" frameborder="0" class=" h-[80vh] w-[70vw] rounded z-50"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
     </div>
-
-    <!-- Error message if no trailer found -->
-    <div v-if="error || trailerUrl === 'Trailer not available'" class="text-red-300">Trailer not available</div>
+    <div v-if="error || trailerUrl === 'Trailer not available'" class="flex w-[99vw] justify-center items-center text-white text-xl">{{ title }} trailer not available at this time</div>
   </div>
 </template>
 
@@ -21,17 +21,18 @@ export default {
       type: String,
       required: true,
     },
+    modelValue: Boolean,
+
   },
   data() {
     return {
-      movieTitle: this.title, // Default to the passed movie title
-      trailerUrl: null, // URL of the trailer video
+      movieTitle: this.title,
+      trailerUrl: null,
       error: null, // Error message if no trailer is found
-      apiKey: import.meta.env.VITE_TMDB_API_KEY, // Access the TMDb API key from the environment
+      apiKey: import.meta.env.VITE_TMDB_API_KEY,
     };
   },
   mounted() {
-    // Fetch trailer when the component is mounted
     this.fetchTrailer();
   },
   methods: {

@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # Hardcoding the movie title
-        movie_title = 'Captain America: The First Avenger'  # Change this to any movie title you want to hardcode
+        movie_title = 'Star Wars'  # Change this to any movie title you want to hardcode
         
         # Get TMDb API key from environment variable
         api_key = os.environ.get('TMDB_API_KEY')

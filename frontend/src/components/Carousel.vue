@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col">
 
-    <h1 class="mb-2 ml-[2.5rem] text-4xl font-bold">In Theatres</h1>
+    <h1 class="mb-2 lg:ml-[2.5rem] text-center lg:text-left text-2xl font-semibold">In Theatres</h1>
 
     <div class="relative overflow-hidden font-bold" @mouseenter="pauseCarousel" @mouseleave="startCarousel">
-      <div class="flex w-[290px] transition-transform duration-500 ease-in-out h-full"
+      <div class="flex lg:w-[290px] transition-transform duration-500 ease-in-out h-full"
         :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
         <div v-for="(movie, index) in movies" :key="index"
           class="flex justify-center items-center flex-shrink-0 w-full relative  overflow-hidden">

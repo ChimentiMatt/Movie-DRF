@@ -2,9 +2,9 @@
   <div>
 
     <!-- Display trailer if found -->
-    <div v-if="trailerUrl !== 'Trailer not available' || error" class="w-full " aria-hidden="true">
-      <iframe :src="trailerUrlWithParams" frameborder="0" class="rounded"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="560"
+    <div v-if="trailerUrl !== 'Trailer not available' || error" class="" aria-hidden="true">
+      <iframe :src="trailerUrlWithParams" frameborder="0" class="rounded w-screen lg:w-[560px]"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
         height="315">
       </iframe>
     </div>

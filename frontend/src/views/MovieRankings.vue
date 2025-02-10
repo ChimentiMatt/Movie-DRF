@@ -1,14 +1,14 @@
 <template>
-  <div class="dark:bg-[#121212] dark:text-[#F5F5F5] pl-[5rem] pr-[5rem] pt-[1.5rem]">
+  <div class="dark:bg-[#121212] dark:text-[#F5F5F5] pl-[1rem] lg:pl-[5rem] lg:pr-[5rem] pt-[1.5rem]">
     <!-- Search Box -->
     <input v-model="searchQuery" type="text" placeholder="Search for a movie..." @input="loadPage(1)"
       class="search-box bg-gray-100 text-black dark:text-white rounded border-2 border-black dark:border-white dark:bg-[#121212]" />
 
     <!-- Movie Rankings Table -->
     <div v-if="movies.length">
-      <table class="movie-table">
+      <table class="movie-table lg:w-full">
         <thead>
-          <tr>
+          <tr class="text-[0.5rem]">
             <th>Title</th>
             <th>Vote Average</th>
             <th>Release Date</th>
@@ -17,7 +17,7 @@
         <tbody>
           <!-- Display movies -->
           <tr v-for="movie in movies" :key="movie.id" @click="goToMovieDetails(movie.id)"
-            class="group hover:bg-blue-500">
+            class="group hover:bg-blue-500 text-[0.5rem]">
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.title }}</td>
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.vote_average }}</td>
             <td class="group-hover:text-white group-hover:bg-blue-500">{{ movie.release_date }}</td>
@@ -79,7 +79,6 @@ export default {
 <style scoped>
 /* Table styling */
 .movie-table {
-  width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
@@ -111,10 +110,11 @@ export default {
 
 /* Pagination styling */
 .pagination {
-  margin-top: 20px;
+  margin-top: 1rem;
   display: flex;
   justify-content: end;
   gap: 10px;
+  margin-right: 1rem;
 }
 
 .pagination button:disabled {
@@ -124,7 +124,7 @@ export default {
 .search-box {
   margin: 20px 0;
   padding: 10px;
-  width: 300px;
+  /* width: 300px; */
   display: block;
   margin-bottom: 20px;
 }

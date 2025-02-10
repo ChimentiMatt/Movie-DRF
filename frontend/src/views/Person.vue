@@ -1,19 +1,17 @@
-<!-- Change state name to not be actor -->
-
 
 <template>
-
   <div v-if="loading"
     class="flex min-h-screen justify-center items-center min-h[40rem] dark:bg-[#121212] text-black dark:text-[#F5F5F5] pl-[5rem] pr-[5rem]">
     <p>Loading...</p>
   </div>
-  <div v-if="person" class="flex flex-col dark:bg-[#121212] text-black dark:text-[#F5F5F5] pl-[5rem] pr-[5rem]">
+  <div v-if="person" class="flex flex-col dark:bg-[#121212] text-black dark:text-[#F5F5F5]  pl-[1rem] pr-[1rem] lg:pl-[5rem] lg:pr-[5rem]">
     <h1>{{ person.name }}</h1>
-    <img :src="'https://image.tmdb.org/t/p/original/' + person.headshot_url" alt="picture of person">
+    <img :src="'https://image.tmdb.org/t/p/original/' + person.headshot_url" alt="picture of person" class="w-screen">
     <p>{{ person.birthday }}</p>
     <p>{{ person.place_of_birth }}</p>
     <p>{{ person.known_for_department }}</p>
     <p>{{ person.biography }}</p>
+
     <p v-if="person.gender === 1">female</p>
     <p v-else>male</p>
 
@@ -21,16 +19,16 @@
     <h2>Upcoming</h2>
     <h2>Previous</h2>
 
-    <div class="border border-gray-300 rounded-lg shadow-md p-4 mb-4">
-      <div v-for="movie in personsMovies" :key="movie.id" class=" pt-2 border-b border-gray-300 last:border-b-0">
+    <div class=" lg:border border-gray-300 rounded-lg shadow-md p-4 mb-4">
+      <div v-for="movie in personsMovies" :key="movie.id" class="pt-2">
         <div class="flex justify-between items-center">
-          <div class="flex">
+          <div class="flex items-center">
             <!-- Movie Poster -->
             <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" :alt="movie.title"
-              class="h-[5rem] object-cover object-contain" />
+              class=" h-[5rem] object-cover object-contain" />
 
             <!-- Movie Details -->
-            <div class="flex flex-col pl-4 gap-2">
+            <div class="flex flex-col pl-4 ">
               <p class="font-bold">{{ movie.title }}</p>
               <p>⭐ {{ movie.vote_average }}</p>
 
@@ -38,17 +36,19 @@
               <div v-for="personRole in movie.movie_person" :key="personRole.id">
                 <div v-if="personRole.person_name === person.name">Role: {{ personRole.role }}</div>
               </div>
+
+              <!-- Release Date Small Screen-->
+              <p class="block lg:hidden">{{ movie.release_date }}</p>
             </div>
           </div>
 
-          <!-- Release Date -->
-          <p>{{ movie.release_date }}</p>
+          <!-- Release Date Large Screen-->
+          <p class="hidden lg:block">{{ movie.release_date }}</p>
+
         </div>
+
       </div>
     </div>
-
-
-
   </div>
 
   <div v-else class="flex flex-col dark:bg-[#121212] text-black dark:text-[#F5F5F5] pl-[5rem] pr-[5rem]">

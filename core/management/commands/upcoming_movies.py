@@ -117,6 +117,8 @@ class Command(BaseCommand):
         else:
             print(f"Error: Unable to fetch upcoming movies. Status code: {response.status_code}")
 
+        print('len', len(data['results']))
+
 '''
 NOTES: 
 will need to update after release 

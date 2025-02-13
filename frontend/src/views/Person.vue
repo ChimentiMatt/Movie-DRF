@@ -1,25 +1,31 @@
-
 <template>
   <div v-if="loading"
     class="flex min-h-screen justify-center items-center min-h[40rem] dark:bg-[#121212] text-black dark:text-[#F5F5F5] pl-[5rem] pr-[5rem]">
     <p>Loading...</p>
   </div>
-  <div v-if="person" class="flex flex-col dark:bg-[#121212] text-black dark:text-[#F5F5F5]  pl-[1rem] pr-[1rem] lg:pl-[5rem] lg:pr-[5rem]">
+  <div v-if="person"
+    class="flex flex-col dark:bg-[#121212] text-black dark:text-[#F5F5F5]  pl-[1rem] pr-[1rem] lg:pl-[5rem] lg:pr-[5rem]">
     <h1>{{ person.name }}</h1>
-    <img :src="'https://image.tmdb.org/t/p/original/' + person.headshot_url" alt="picture of person" class="w-screen">
-    <p>{{ person.birthday }}</p>
-    <p>{{ person.place_of_birth }}</p>
-    <p>{{ person.known_for_department }}</p>
-    <p>{{ person.biography }}</p>
+    <div class="flex flex-col lg:flex-row">
 
-    <p v-if="person.gender === 1">female</p>
-    <p v-else>male</p>
+      <img :src="'https://image.tmdb.org/t/p/original/' + person.headshot_url" alt="picture of person" class="w-screen">
+      <div class="lg:ml-[1rem]">
+        
+        <p>Date of Birth: {{ person.birthday }}</p>
+        <p>Place of Birth: {{ person.place_of_birth }}</p>
+        <p>Known for: {{ person.known_for_department }}</p>
+        <p>Biography: {{ person.biography }}</p>
+        
+        <p v-if="person.gender === 1">female</p>
+        <p v-else>male</p>
+        
+        <h1>Roles</h1>
+        <h2>Upcoming</h2>
+        <h2>Previous</h2>
+      </div>
+    </div>
 
-    <h1>Roles</h1>
-    <h2>Upcoming</h2>
-    <h2>Previous</h2>
-
-    <div class=" lg:border border-gray-300 rounded-lg shadow-md p-4 mb-4">
+    <div class=" lg:border border-gray-300 rounded-lg shadow-md p-4 mb-4 mt-[1rem]">
       <div v-for="movie in personsMovies" :key="movie.id" class="pt-2">
         <div class="flex justify-between items-center">
           <div class="flex items-center">

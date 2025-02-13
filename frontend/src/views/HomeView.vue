@@ -6,7 +6,7 @@
       <UpcomingMovies />
     </div>
 
-    <IconicCelebs />
+    <TrendingCelebs />
     <Test />
 
   </main>
@@ -14,16 +14,25 @@
 
 <script>
 import Carousel from "@/components/Carousel.vue";
-import IconicCelebs from "@/components/IconicCelebs.vue";
+import TrendingCelebs from "@/components/TrendingCelebs.vue";
 import UpcomingMovies from "@/components/UpcomingMovies.vue"
 import Test from "@/components/Test.vue";
+import movieService from "../api/movieService.js";
+import { useInTheatresStore } from "@/stores/inTheatres.js"
+
 
 export default {
   components: {
     Carousel,
     UpcomingMovies,
-    IconicCelebs,
+    TrendingCelebs,
     Test,
+  },
+  setup() {
+    const inTheatresStore = useInTheatresStore();
+    inTheatresStore.fetchMovies();
+
+    return { inTheatresStore };
   },
   data() {
     return {
@@ -33,6 +42,13 @@ export default {
         { title: "Movie 3", releaseDate: "2025-07-20", poster: "https://via.placeholder.com/80x120" },
       ],
     };
+  },
+  async created() {
+    try {
+      movieService.getInTheatreMovies();
+    } catch (err) {
+      console.error("Failed to fetch movies:", err);
+    }
   },
 };
 </script>

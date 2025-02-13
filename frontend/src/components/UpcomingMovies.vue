@@ -6,10 +6,7 @@
     </div>
 
     <div class="flex justify-between items-center relative font-semibold ml-2 text-2xl">
-
       <h1>Upcoming Movies</h1>
-
-
     </div>
 
     <div class="h-[315px] lg:w-[25rem] lg:ml-2 mt-[0.5rem] pl-4 rounded text-black dark:text-white rounded-xl custom-shadow">

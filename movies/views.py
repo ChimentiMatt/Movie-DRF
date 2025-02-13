@@ -1,17 +1,16 @@
+from datetime import timedelta
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.utils import timezone
 from datetime import timedelta
-
-from .models import Movie
-from people.models import MoviePerson
-
 from django.http import JsonResponse
 from django.utils import timezone
-from datetime import timedelta
-from .models import Movie  # Ensure Movie model is imported
+
+from .models import Movie
+from .models import Movie
+from people.models import MoviePerson
 
 def upcoming_movie(request):
     """Returns a list of upcoming movies in JSON format, with an optional query param for limiting results."""
@@ -55,7 +54,6 @@ def in_theatres_movies(request):
     """Returns a list of upcoming movies in json format"""
     today = timezone.now().date()
     two_months_ago = today - timedelta(weeks=8)
-    # TODO rename func and endpoint is this is going to be a in theatres movie list. I might want to limit to as it could be up to 25 movies 
     movies = Movie.objects.filter(release_date__gte=two_months_ago, release_date__lte=today)
     movie_data = [
         {
@@ -70,6 +68,21 @@ def in_theatres_movies(request):
             "vote_count": movie.vote_count,
             "mpaa_rating": movie.mpaa_rating,
             "poster_url": movie.get_poster_url(),
+            "people": [
+                {
+                    "id": person.id,
+                    "name": person.name,
+                    "gender": person.gender,
+                    "birthday": person.birthday,
+                    "deathday": person.deathday,
+                    "place_of_birth": person.place_of_birth,
+                    "known_for_department": person.known_for_department,
+                    "headshot_url": person.headshot_url,
+                    "tmdb_id": person.tmdb_id,
+                    "role": movie.movieperson_set.get(person=person).role
+                }
+                for person in movie.people.all()
+            ],
         }
         for movie in movies
     ]
